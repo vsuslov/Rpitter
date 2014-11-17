@@ -7,6 +7,14 @@
     </h:head>
     <h:body>
         Hello from Facelets
+
+        <h:form >
+            <h:outputText value="Login:"/>
+            <h:inputText id="${index.login}"/><br/>
+            <h:outputText value="E-mail:"/>
+            <h:inputText id="${index.email}"/><br/>
+            <h:commandButton action="${index.addCustomer()}" value="Go"/>
+        </h:form>
     </h:body>
 </html>
 
