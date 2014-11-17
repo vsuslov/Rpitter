@@ -18,7 +18,7 @@ import ru.rs.rpitter.CustomerDao;
  */
 @ManagedBean(name = "index", eager = true)
 @RequestScoped
-public class index {
+public class Index {
 
     private String login;
     private String email;
@@ -30,8 +30,8 @@ public class index {
         return dao.findAllCustomers();
     }
 
-    public void addCustomer(Customer c) {
-
+    public void addCustomer() {
+        dao.addCustomer(new Customer(login,email));
     }
 
     public String getLogin() {
