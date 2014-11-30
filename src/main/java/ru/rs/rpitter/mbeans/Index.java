@@ -23,13 +23,25 @@ public class Index {
     private String login;
     private String email;
 
+//    private List<Customer> customers;
+//    {
+//        customers=new ArrayList<Customer>();
+//        customers.add(new Customer("mock1","mock1@mail.ru"));
+//        customers.add(new Customer("mock2","mock2@gmail.com"));
+//    }
+    
     @EJB
     private CustomerDao dao;
 
     public List<Customer> getCustomers() {
-        return dao.findAllCustomers();
+       List<Customer> customers=dao.findAllCustomers();
+        return customers;
+//        return dao.findAllCustomers();
     }
 
+    public void deleteCustomer() {
+        
+    }
     public void addCustomer() {
         dao.addCustomer(new Customer(login,email));
     }

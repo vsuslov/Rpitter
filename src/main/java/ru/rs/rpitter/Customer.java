@@ -5,10 +5,12 @@
  */
 package ru.rs.rpitter;
 
+import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 
 /**
@@ -16,8 +18,10 @@ import javax.persistence.NamedQuery;
  * @author Admin
  */
 @Entity
-@NamedQuery(name = "allCustomers", query = "select c from Customer c")
-public class Customer {
+@NamedQueries( {
+@NamedQuery(name = "allCustomers", query = "select c from Customer c"),
+@NamedQuery(name="customerByLoginAndEmail", query = "select c from Customer c where c.login=:login and c.email=:email")})
+public class Customer implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
