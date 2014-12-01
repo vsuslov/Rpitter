@@ -8,8 +8,8 @@ package ru.rs.rpitter;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
-import javax.persistence.EntityTransaction;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -20,6 +20,8 @@ public class CustomerDao {
 
     @PersistenceContext(unitName = "rpitter")
     private EntityManager em;
+    
+    
 
     public Long addCustomer(Customer c) {
         em.persist(c);
@@ -34,15 +36,23 @@ public class CustomerDao {
         return em.find(Customer.class, id);
     }
     
-    public void removeCustomer(Long id) {
-     EntityTransaction t= em.getTransaction();
-     t.begin();
-       Customer c=findCustomerById(id);
+    public void removeCustomer(Customer customer) {
+     
+     String login=customer.getLogin();
+     String email=customer.getEmail();
+       Customer c=findByLoginAndEmail(login,email);
+       if(c!=null) {
         em.remove(c);
-       t.commit();
+       }
     }
     
     public Customer findByLoginAndEmail(String login, String email){
-        return (Customer) em.createNamedQuery("customerByLoginAndEmail").getSingleResult();
+        Customer result=null;
+        Query query=em.createNamedQuery("customerByLoginAndEmail").setParameter("login", login).setParameter("email", email);
+        List<Customer> list= query.getResultList();
+       if(list.size()>0) {
+           result=list.get(0);
+       }
+       return result;
     }
 }

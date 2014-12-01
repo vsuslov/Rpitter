@@ -3,7 +3,7 @@ package ru.rs.rpitter.mbeans;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
 import ru.rs.rpitter.Customer;
 import ru.rs.rpitter.CustomerDao;
 
@@ -17,30 +17,25 @@ import ru.rs.rpitter.CustomerDao;
  * @author Admin
  */
 @ManagedBean(name = "index", eager = true)
-@RequestScoped
+@SessionScoped
 public class Index {
 
     private String login;
     private String email;
 
-//    private List<Customer> customers;
-//    {
-//        customers=new ArrayList<Customer>();
-//        customers.add(new Customer("mock1","mock1@mail.ru"));
-//        customers.add(new Customer("mock2","mock2@gmail.com"));
-//    }
-    
+   
     @EJB
     private CustomerDao dao;
 
     public List<Customer> getCustomers() {
        List<Customer> customers=dao.findAllCustomers();
         return customers;
-//        return dao.findAllCustomers();
     }
+    
 
     public void deleteCustomer() {
-        
+        Customer customer=new Customer(login,email);
+        dao.removeCustomer(customer);
     }
     public void addCustomer() {
         dao.addCustomer(new Customer(login,email));

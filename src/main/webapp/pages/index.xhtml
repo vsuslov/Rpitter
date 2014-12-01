@@ -6,6 +6,7 @@
       xmlns:c="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title>Facelet Title</title>
+        <h:outputStylesheet library="general" name="css/main.css"/>
     </h:head>
     <h:body>
         Hello from Facelets<br/>
@@ -14,11 +15,18 @@
             <h:inputText id="login" value="#{index.login}"/><br/>
             <h:outputText value="E-mail:"/>
             <h:inputText id="email" value="#{index.email}"/>
-            <h:commandButton id="submit" action="#{index.addCustomer()}" value="GO"/>
-            <h:commandButton id="delete" action="#{index.deleteCustomer()}" value="Delete" />
+            <h:commandButton id="submit" action="#{index.addCustomer()}" value="GO">
+                <c:ajax execute="login email" render="ajxtbl"/>
+            </h:commandButton>
+            <h:commandButton id="delete" action="#{index.deleteCustomer()}" value="Delete">
+                <c:ajax execute="login email" render="ajxtbl"/>
+            </h:commandButton>
         </h:form>
         
-        <h:dataTable value="#{index.customers}" var="cust" border="1">
+        <h:dataTable id="ajxtbl" value="#{index.customers}" var="cust" border="1">
+            <h:column>
+                <h:selectBooleanCheckbox id="chk_#{cust.id}"/>
+            </h:column>
             <h:column>
                 <h:outputText value="#{cust.id}"/>
             </h:column>
@@ -31,5 +39,6 @@
             
         </h:dataTable>
     </h:body>
+    <h:messages errorClass="error" infoClass="info" warnClass="warning"/>
 </html>
 
