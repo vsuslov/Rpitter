@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:fc="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <title><fc:insert name="tittle">Facelet Title</fc:insert></title>
+        <h:outputStylesheet library="pages" name="layouts/main.css"/>
+        <h:outputScript library="pages" name="layouts/main.js"/>
+        <fc:insert name="scripts"/>
+    </h:head>
+    <h:body>
+        <div id="header" style="margin:10px;position:relative;min-width:50%;heigt:100px;">
+            <fc:insert name="header"><center>Maintaining...!</center></fc:insert>
+        </div>
+        <div id="menu" style="margin:0px 10px;background-color:black;color:white;min-width: 50%;height:30px;">
+            <fc:insert name="menu">Menu1 &nbsp; Menu2 &nbsp; Menu3</fc:insert>
+        </div>
+        <div id="preview" style="position:relative;margin:10px 10px;float:left; width:200px; height:40%">
+            <fc:insert name="preview">Some quick news here</fc:insert>
+        </div>
+        <div id="content" style="position:relative; margin:10px 10px; min-width:300px; float:left; height:40%;">
+            <fc:insert name="content"><center>Content</center></fc:insert>
+        </div>
+        <div id="footer" style="clear:both; position: relative; height:30px; min-width:500px; margin:10px;">
+            <fc:insert name="footer"><center>Some footer info here</center></fc:insert>
+        </div>
+    </h:body>
+</html>
+
